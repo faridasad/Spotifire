@@ -1,4 +1,5 @@
 $panel-gap: 8px;
+$background-base: #121212;
 
 .rootGrid {
   padding: $panel-gap;
@@ -11,4 +12,5 @@ $panel-gap: 8px;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr auto;
   gap: $panel-gap;
+  background-color: #000000;
 }
