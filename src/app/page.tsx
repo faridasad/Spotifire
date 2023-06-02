@@ -1,8 +1,14 @@
-import Image from 'next/image'
-import styles from './styles/page.module.scss'
+import LeftSidebar from '@/components/LeftSidebar'
+import styles from './page.module.scss'
+import MainView from '@/components/MainView'
+import NowPlaying from '@/components/NowPlaying'
 
 export default function Home() {
   return (
-    <main>Hi mom</main>
+    <div className={styles.rootGrid}>
+      <LeftSidebar />
+      <MainView />
+      <NowPlaying />
+    </div>
   )
 }
