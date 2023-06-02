@@ -1,0 +1,26 @@
+.aside {
+
+    --sidebar-width: 280px;
+
+    border-radius: 8px;
+    height: 100%;
+    width: var(--sidebar-width);
+    background-color: bisque;
+    grid-area: left-sidebar;
+    position: relative;
+
+    .left-sidebar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .resizeHandle {
+        position: absolute;
+        top: 0;
+        right: -5px; /* Adjust the position as needed */
+        width: 10px;
+        height: 100%;
+        cursor: ew-resize;
+        z-index: 1;
+      }
+}
