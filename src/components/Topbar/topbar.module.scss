@@ -1,0 +1,139 @@
+.header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    position: sticky;
+    top: 0;
+  
+  
+    .navigation_arrows {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+  
+      button {
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+  
+        &:disabled {
+          background-color: rgba(0, 0, 0, 0.3);
+          cursor: not-allowed;
+        }
+      }
+    }
+  
+    .child_comp {
+      margin-right: auto;
+      margin-left: 1rem;
+    }
+  
+    .login_button {
+      height: 48px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 500px;
+      background-color: limegreen;
+  
+      span {
+        color: #282828;
+        padding: 8px 32px;
+      }
+  
+  
+      &:hover {
+        background-color: #f6f6f6;
+        scale: 1.03;
+        font-weight: bold;
+      }
+    }
+  
+    .profile_con {
+      position: relative;
+  
+      .menu_items {
+          position: absolute;
+          right: 0;
+          width: 168px;
+          display: flex;
+          flex-direction: column;
+          background-color: #282828;
+          border-radius: 4px;
+          padding: 4px;
+          user-select: none;
+          margin-top: 7px;
+          font-weight: 500;
+          font-size: 0.875rem;
+  
+          a {
+              border-radius: 4px;
+              padding: 10px 8px 10px 10px;
+              cursor: auto;
+  
+              display: flex;
+              align-items: center;    
+              justify-content: space-between;
+          }
+  
+          a.active {
+              background-color: #222;
+          }
+  
+          span.menu_divider {
+              height: 1px;
+              background-color: #222;
+              margin: 2px 5px; 
+          }
+      }
+    }
+  
+    .user_profile {
+      height: 32px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-radius: 23px;
+      padding: 2px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      cursor: pointer;
+  
+      img,
+      svg,
+      span {
+        pointer-events: none;
+      }
+  
+      img {
+        object-fit: cover;
+        object-position: center center;
+        border-radius: 50%;
+      }
+  
+      svg {
+        margin-right: 6px;
+      }
+  
+      span {
+        font-size: 14px;
+        font-weight: 500;
+      }
+  
+      &:hover {
+        background-color: #282828;
+      }
+    }
+  }
+  
