@@ -80,7 +80,7 @@ const LeftSidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/search" >
                   <Icon name="search" /> Search
                 </Link>
               </li>
