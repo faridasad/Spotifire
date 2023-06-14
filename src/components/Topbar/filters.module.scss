@@ -1,0 +1,34 @@
+.filters {
+    margin-left: 2rem;
+    nav {
+
+
+        ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+
+            li:not(:last-child) {
+                margin-right: 8px;
+            }
+
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+                font-size: 15px;
+
+                a{
+                    padding: 8px 16px;
+                    border-radius: 4px;
+
+
+                    &.active {
+                        background-color: #333333;
+                    }
+                }
+            }
+        }
+    }
+}
