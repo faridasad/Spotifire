@@ -123,7 +123,7 @@ const LeftSidebar = () => {
             </div>
           </div>
         </div>
-        
+        <Library />
       </div>
 
       
