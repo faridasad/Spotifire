@@ -3,6 +3,7 @@ import { useRef } from "react";
 import styles from "./left-sidebar.module.scss";
 import Link from "next/link";
 import Icon from "../Icons";
+import Library from "../Library";
 
 const MAX_WIDTH = 351;
 const MIN_WIDTH = 71;
@@ -71,6 +72,7 @@ const LeftSidebar = () => {
   return (
     <div className={styles.aside} ref={leftSidebarRef}>
       <div className={styles.left_sidebar}>
+        <div>
         <div className={styles.navigation}>
           <nav>
             <ul>
@@ -116,13 +118,18 @@ const LeftSidebar = () => {
                 <Icon name="search" size={16} />
               </button>
               <div className={styles.dropdown}>
-                Recently Added <Icon name="dropDown" size={16} />
+                Recents <Icon name="dropDown" size={16} />
               </div>
             </div>
           </div>
         </div>
+        
+      </div>
+
+      
       </div>
       <div className={styles.resizeHandle} onMouseDown={startResize}></div>
+      
     </div>
   );
 };
