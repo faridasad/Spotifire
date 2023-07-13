@@ -107,9 +107,6 @@ const LeftSidebar = () => {
               <span>Playlists</span>
             </button>
             <button>
-              <span>Albums</span>
-            </button>
-            <button>
               <span>Podcasts & Shows</span>
             </button>
           </div>
