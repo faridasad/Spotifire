@@ -1,17 +1,19 @@
-"use client";
-
 import { signIn, signOut } from "next-auth/react";
-import { Menu } from "@headlessui/react";
 import Icon from "../Icons";
 import { ReactNode } from "react";
-import Image from "next/image";
 import styles from "./topbar.module.scss";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import DropdownMenu from "./DropdownMenu";
+import LoginButton from "./LoginButton";
 
-const Topbar = ({ children }: { children: ReactNode }) => {
+export default async function Topbar({ children }: { children: ReactNode }) {
+  const session = await getServerSession(options);
+
   return (
     <header className={styles.header}>
       <div className={styles.navigation_arrows}>
-        <button name="Go Prev" onClick={() => signOut()}>
+        <button name="Go Prev">
           <Icon name="navigationPrev" size={16} />
         </button>
         <button name="Go Forward" disabled>
@@ -19,16 +21,15 @@ const Topbar = ({ children }: { children: ReactNode }) => {
         </button>
       </div>
       <div className={styles.child_comp}>{children !== null && children}</div>
-      <button
-        className={styles.login_button}
-        onClick={() => {
-          signIn("spotify", { callbackUrl: "/" });
-        }}
-      >
-        <span>Login</span>
-      </button>
+
+      {session ? (
+        <DropdownMenu
+          imageUrl={session.user?.image}
+          username={session.user?.name}
+        />
+      ) : (
+        <LoginButton />
+      )}
     </header>
   );
-};
-
-export default Topbar;
+}
