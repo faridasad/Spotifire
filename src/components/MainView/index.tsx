@@ -1,10 +1,9 @@
-"use client";
 import Topbar from "../Topbar";
 import styles from "./main-view.module.scss";
 import { usePathname } from "next/navigation";
 
-const MainView = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
+
+const MainView = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={styles.main_view}>
