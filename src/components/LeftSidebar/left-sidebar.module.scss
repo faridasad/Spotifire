@@ -10,6 +10,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    border-radius: 8px;
+    overflow: hidden;
 
     > div {
       background-color: #121212;
@@ -97,91 +99,7 @@
         }
       }
 
-      .categories {
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        margin: 8px 16px;
-        position: relative;
-
-        button {
-          display: inline-flex;
-
-          &:not(:last-child) {
-            margin-right: 10px;
-          }
-
-          &:last-child {
-            white-space: nowrap;
-          }
-
-          span {
-            height: 100%;
-            padding: 8px 12px;
-            border-radius: 32px;
-            background-color: hsla(0, 0%, 100%, 0.07);
-            font-weight: 700;
-          }
-        }
-      }
-
-      .lib_content {
-        display: flex;
-        flex-direction: column;
-        padding: 0 8px 8px;
-        
-
-        .search_filter {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 2px 8px 0;
-
-          button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-
-            svg {
-              width: 100%;
-              height: 100%;
-              padding: 8px;
-              border-radius: 50%;
-              filter: brightness(0.8);
-              transition: filter 0.2s ease-in-out;
-            }
-
-            &:hover {
-              background-color: rgba(255, 255, 255, 0.1);
-
-              svg {
-                filter: brightness(1);
-              }
-            }
-          }
-
-          .dropdown {
-            font-size: 0.875rem;
-            font-weight: 500;
-            padding: 0 8px 0 12px;
-            cursor: pointer;
-
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-
-            filter: brightness(0.8);
-            transition: filter 0.2s ease-in-out;
-
-            &:hover {
-              filter: brightness(1);
-            }
-          }
-        }
-      }
+      
     }
   }
 

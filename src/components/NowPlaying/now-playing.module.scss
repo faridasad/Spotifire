@@ -3,11 +3,12 @@
     bottom: 0;
     width: 100%;
     grid-area: now-playing-bar;
+    background-color: #000;
   
     .footer_wrapper {
       height: 90px;
       padding: 0 16px;
-      border-top: 1px solid rgba(255, 255, 255, .1);
+/*       border-top: 1px solid rgba(255, 255, 255, .1); */
   
       button {
         background-color: transparent;
