@@ -1,37 +1,28 @@
+
+"use client"
 import Image from "next/image";
 import styles from "./library.module.scss";
+import spotifyApi from "../../../lib/spotify";
+import { signIn, useSession } from "next-auth/react";
+import { Session, getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
-const dummyData = [
-  {
-    id: 1,
-    name: "boyum olsa da bir elli",
-    type: "Podcast",
-    author: "kore10",
-    img_url:
-      "https://hips.hearstapps.com/hmg-prod/images/biggie_smalls_photo_by_clarence_davis_new_york_daily_news_archive_getty_97348258.jpg",
-  },
-  {
-    id: 2,
-    name: "poxdan kanfet",
-    type: "Playlist",
-    author: "ebiay",
-    img_url:
-      "https://upload.wikimedia.org/wikipedia/en/5/51/The_Notorious_B.I.G.jpg",
-  },
-  {
-    id: 3,
-    name: "eatin big pun",
-    type: "Playlist",
-    author: "leş fikret",
-    img_url:
-      "https://hips.hearstapps.com/hmg-prod/images/gettyimages-547402373.jpg?resize=1200:*",
-  },
-];
 
-const Library = () => {
+export default function Library(){
+
+  const {data: session} = useSession({
+    required: true,
+    /* onUnauthenticated(){
+      redirect('/api/auth/signin/spotify')
+    } */
+  }) 
+
+  console.log(session)
+
   return (
     <div className={styles.library}>
-      <ul role="list">
+      {/* <ul role="list">
         {dummyData.map((i) => {
           return (
             <li key={i.id}>
@@ -47,9 +38,8 @@ const Library = () => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
     </div>
   );
 };
 
-export default Library;

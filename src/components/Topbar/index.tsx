@@ -1,4 +1,3 @@
-import { signIn, signOut } from "next-auth/react";
 import Icon from "../Icons";
 import { ReactNode } from "react";
 import styles from "./topbar.module.scss";
@@ -9,6 +8,7 @@ import LoginButton from "./LoginButton";
 
 export default async function Topbar({ children }: { children: ReactNode }) {
   const session = await getServerSession(options);
+
 
   return (
     <header className={styles.header}>

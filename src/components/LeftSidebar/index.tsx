@@ -9,7 +9,8 @@ const MAX_WIDTH = 351;
 const MIN_WIDTH = 71;
 const DEFAULT_WIDTH = 280;
 
-const LeftSidebar = () => {
+const LeftSidebar = async () => {
+  
   const leftSidebarRef = useRef<HTMLDivElement>(null);
 
   const resize = (e: MouseEvent) => {
