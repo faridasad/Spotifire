@@ -105,24 +105,7 @@ const LeftSidebar = async () => {
               </button>
             </div>
           </header>
-          <div className={styles.categories}>
-            <button>
-              <span>Playlists</span>
-            </button>
-            <button>
-              <span>Podcasts & Shows</span>
-            </button>
-          </div>
-          <div className={styles.lib_content}>
-            <div className={styles.search_filter}>
-              <button>
-                <Icon name="search" size={16} />
-              </button>
-              <div className={styles.dropdown}>
-                Recents <Icon name="dropDown" size={16} />
-              </div>
-            </div>
-          </div>
+          
         </div>
         <Library />
       </div>
