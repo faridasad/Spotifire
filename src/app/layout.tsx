@@ -4,6 +4,7 @@ import LeftSidebar from "@/components/LeftSidebar";
 import styles from "./page.module.scss";
 import MainView from "@/components/MainView";
 import NowPlaying from "@/components/NowPlaying";
+import Provider from "@/components/Provider";
 
 export const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
@@ -18,7 +19,7 @@ export const metadata = {
   description: "Spotify clone built with Next.js",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -27,9 +28,11 @@ export default function RootLayout({
     <html lang="en" className={`${roboto.variable}`}>
       <body className={roboto.className}>
         <div className={styles.rootGrid}>
-          <LeftSidebar />
-          <MainView>{children}</MainView>
-          <NowPlaying />
+          <Provider>
+            <LeftSidebar />
+            <MainView>{children}</MainView>
+            <NowPlaying />
+          </Provider>
         </div>
       </body>
     </html>
