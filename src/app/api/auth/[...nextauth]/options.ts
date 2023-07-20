@@ -13,9 +13,8 @@ const refreshAccessToken = async (token: any) => {
       ...token,
       accessToken: refreshedToken.access_token,
       accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000,
-      refreshedToken: refreshedToken.refresh_token ?? token.refreshToken
-    }
-
+      refreshedToken: refreshedToken.refresh_token ?? token.refreshToken,
+    };
   } catch (err) {
     console.error(err);
 
@@ -57,12 +56,12 @@ export const options: NextAuthOptions = {
 
       return await refreshAccessToken(token);
     },
-  },
-  async session({session, token} : any){
-    session.user.accessToken = token.accessToken
-    session.user.refreshToken = token.refreshToken
-    session.user.username = token.username
+    async session({ session, token }: any) {
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.user.username = token.username;
 
-    return session;
-  }
+      return session;
+    },
+  },
 };
