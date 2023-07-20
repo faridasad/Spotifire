@@ -3,7 +3,9 @@ $background-base: #121212;
 
 .rootGrid {
   padding: $panel-gap;
+  padding-bottom: 0;
   height: 100%;
+  overflow: hidden;
   display: grid;
   grid-template-areas:
     "left-sidebar main-view"
