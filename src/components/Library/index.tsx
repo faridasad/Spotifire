@@ -13,7 +13,7 @@ export default function Library() {
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi.getUserPlaylists().then((data) => {
+      spotifyApi.getUserPlaylists().then((data : any) => {
         setPlaylists(data.body.items);
       });
     }
@@ -40,7 +40,7 @@ export default function Library() {
         </div>
       </div>
       <ul role="list">
-        {playlists.map((i) => {
+        {playlists.map((i : any) => {
           return (
             <li key={i.id}>
               <span className={styles.img_con}>

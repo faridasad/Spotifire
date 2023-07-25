@@ -3,10 +3,10 @@
 import { signIn, useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import spotifyApi from "../../../lib/spotify";
+import { Session } from "next-auth";
 
 const useSpotify = () => {
-  
-  const { data: session } = useSession();
+  const { data: session }: any = useSession();
 
   useEffect(() => {
     if (session) {
