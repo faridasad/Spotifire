@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Icon from "../Icons";
+import usePlaylistStore from "@/app/store/playlistState";
+import Link from "next/link";
 
 export default function Library() {
   const spotifyApi = useSpotify();
@@ -13,11 +15,18 @@ export default function Library() {
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi.getUserPlaylists().then((data : any) => {
+      spotifyApi.getUserPlaylists().then((data: any) => {
         setPlaylists(data.body.items);
       });
     }
   }, [session, spotifyApi]);
+
+  const [playlist, updatePlaylist] = usePlaylistStore((state) => [
+    state.playlist,
+    state.updatePlaylist,
+  ]);
+
+  console.log(playlist);
 
   return (
     <div className={styles.library}>
@@ -40,21 +49,28 @@ export default function Library() {
         </div>
       </div>
       <ul role="list">
-        {playlists.map((i : any) => {
+        {playlists.map((i: any) => {
           return (
-            <li key={i.id}>
-              <span className={styles.img_con}>
-                <Image src={i.images[0].url} fill alt="" />
-              </span>
-              <div className={styles.item}>
-                <span className={styles.name}>{i.name}</span>
-                <div className={styles.details}>
-                  <span>{i.type}</span>
-                  &bull;
-                  <span>{i.owner.display_name}</span>
+            <Link href={`/playlist/${i.id}`}>
+              <li
+                key={i.id}
+                onClick={() => {
+                  updatePlaylist(i.id, spotifyApi);
+                }}
+              >
+                <span className={styles.img_con}>
+                  <Image src={i.images[0].url} fill alt="" />
+                </span>
+                <div className={styles.item}>
+                  <span className={styles.name}>{i.name}</span>
+                  <div className={styles.details}>
+                    <span>{i.type}</span>
+                    &bull;
+                    <span>{i.owner.display_name}</span>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            </Link>
           );
         })}
       </ul>
