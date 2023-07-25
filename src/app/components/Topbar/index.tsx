@@ -6,7 +6,7 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import DropdownMenu from "./DropdownMenu";
 import LoginButton from "./LoginButton";
 
-export default async function Topbar({ children }: { children: ReactNode }) {
+export default async function Topbar({ children }: { children?: ReactNode }) {
   const session = await getServerSession(options);
 
 
