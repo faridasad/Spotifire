@@ -1,6 +1,13 @@
+import Image from "next/image"
+import styles from "../../page.module.scss"
+
 const Playlist = () => {
   return (
-    <div>Playlist</div>
+    <div className={styles.playlist}>
+      <div className={styles.header}>
+          
+      </div>
+    </div>
   )
 }
 
