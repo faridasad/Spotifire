@@ -11,6 +11,11 @@ html, body{
   width: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
