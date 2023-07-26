@@ -1,3 +1,4 @@
+'use client'
 import Icon from "../Icons"
 import styles from "./searchbar.module.scss"
 
