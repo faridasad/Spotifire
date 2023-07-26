@@ -1,22 +1,22 @@
-import { create } from 'zustand'
-
+import { create } from "zustand";
+import { PlaylistTypes } from "../types/PlaylistType";
 
 interface PlaylistState {
-  playlist: object
-  updatePlaylist: (id: string, spotifyApi: any) => void
+  playlist: PlaylistTypes;
+  updatePlaylist: (id: string, spotifyApi: any) => void;
 }
 
 const usePlaylistStore = create<PlaylistState>()((set) => ({
-  playlist: {},
+  playlist: {} as PlaylistTypes,
   updatePlaylist: (id, spotifyApi) => {
-    if(spotifyApi.getAccessToken()){
+    if (spotifyApi.getAccessToken()) {
       spotifyApi.getPlaylist(id).then((data: any) => {
         set((state) => ({
-          playlist: data.body
-        }))
-      })
+          playlist: data.body,
+        }));
+      });
     }
-  }
-}))
+  },
+}));
 
-export default usePlaylistStore
+export default usePlaylistStore;
