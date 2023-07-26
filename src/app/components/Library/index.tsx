@@ -1,32 +1,26 @@
-"use client";
 import styles from "./library.module.scss";
-import useSpotify from "@/app/hooks/useSpotify";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import Icon from "../Icons";
-import usePlaylistStore from "@/app/store/playlistState";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+import spotifyApi from "../../../../lib/spotify";
 import Link from "next/link";
+import Image from "next/image";
 
-export default function Library() {
-  const spotifyApi = useSpotify();
-  const [playlists, setPlaylists] = useState([]);
-  const { data: session } = useSession();
+export default async function Library() {
 
-  useEffect(() => {
-    if (spotifyApi.getAccessToken()) {
-      spotifyApi.getUserPlaylists().then((data: any) => {
-        setPlaylists(data.body.items);
-      });
-    }
-  }, [session, spotifyApi]);
+  const session = await getServerSession(options);
 
-  const [playlist, updatePlaylist] = usePlaylistStore((state) => [
-    state.playlist,
-    state.updatePlaylist,
-  ]);
+  if (!session) {
+    redirect("/api/auth/signin/spotify");
+  }
 
-  console.log(playlist);
+  let playlists;
+  if(spotifyApi.getAccessToken()){
+    playlists = (await spotifyApi.getUserPlaylists()).body.items
+  }
+
+
 
   return (
     <div className={styles.library}>
@@ -41,22 +35,17 @@ export default function Library() {
       <div className={styles.lib_content}>
         <div className={styles.search_filter}>
           <button>
-            <Icon name="search" size={16} />
           </button>
           <div className={styles.dropdown}>
-            Recents <Icon name="dropDown" size={16} />
           </div>
         </div>
       </div>
-      <ul role="list">
-        {playlists.map((i: any) => {
+      {<ul role="list">
+        {playlists?.map((i: any) => {
           return (
             <Link href={`/playlist/${i.id}`}>
               <li
                 key={i.id}
-                onClick={() => {
-                  updatePlaylist(i.id, spotifyApi);
-                }}
               >
                 <span className={styles.img_con}>
                   <Image src={i.images[0].url} fill alt="" />
@@ -73,7 +62,7 @@ export default function Library() {
             </Link>
           );
         })}
-      </ul>
+      </ul>}
     </div>
   );
 }
