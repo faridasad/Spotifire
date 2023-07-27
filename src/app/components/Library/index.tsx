@@ -14,13 +14,12 @@ export default async function Library() {
   if (!session) {
     redirect("/api/auth/signin/spotify");
   }
-
+  spotifyApi.setAccessToken(session?.user?.accessToken);
+  
   let playlists;
   if(spotifyApi.getAccessToken()){
     playlists = (await spotifyApi.getUserPlaylists()).body.items
   }
-
-
 
   return (
     <div className={styles.library}>
