@@ -4,6 +4,7 @@ import spotifyApi from "../../../../lib/spotify";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
+import Icon from "@/app/components/Icons";
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -20,8 +21,6 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
     user = await spotifyApi.getUser(playlist.body.owner.id);
   }
 
-
-
   return (
     <div className={styles.playlist}>
       <div className={styles.header}>
@@ -29,12 +28,18 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
           <Image src={playlist?.body.images[0].url ?? ""} fill alt="" />
         </span>
         <div className={styles.header__info}>
-          <p className={styles.header__info__type}>{playlist?.body.type.charAt(0).toUpperCase()! + playlist?.body.type.slice(1)}</p>
+          <p className={styles.header__info__type}>
+            {playlist?.body.type.charAt(0).toUpperCase()! +
+              playlist?.body.type.slice(1)}
+          </p>
           <h1 className={styles.header__info__name}>{playlist?.body.name}</h1>
+          <p className={styles.header__info__description}>
+            {playlist?.body.description}
+          </p>
           <div className={styles.details}>
             <div className={styles.owner}>
               <span className={styles.owner__img}>
-                {<Image src={user?.body.images[0].url ?? ""} fill alt="" />}
+                {<Image src={user?.body.images![0].url ?? ""} fill alt="" />}
               </span>
               <span className={styles.owner__name}>
                 {user?.body.display_name}
@@ -51,15 +56,24 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </div>
-
-      <div className={styles.tracks}>
-        {<ul>
-          {playlist?.body.tracks.items.map((item) => {
-            return (
-              <p>{item.track?.name}</p>
-            )
-          })}
-        </ul>}
+      <div className={styles.content}>
+        <div className={styles.content__actions}>
+          <span className={styles.content__actions__play}>
+            <Icon name="play" />
+          </span>
+          <span className={styles.content__actions__more}>
+            <Icon name="more" />
+          </span>
+        </div>
+        <div className={styles.tracks}>
+          {
+            <ul>
+              {playlist?.body.tracks.items.map((item) => {
+                return <p>{item.track?.name}</p>;
+              })}
+            </ul>
+          }
+        </div>
       </div>
     </div>
   );
