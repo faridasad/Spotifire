@@ -23,6 +23,11 @@
     &__info {
       align-self: flex-end;
 
+      h1 {
+        font-size: clamp(4.5rem, 8vw, 6rem);
+        white-space: nowrap;
+      }
+
       .details {
         display: flex;
         align-items: center;
