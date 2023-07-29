@@ -315,6 +315,21 @@ const ExternalLinkIcon = ({ size }: CustomIconProps) => {
   );
 };
 
+const MoreIcon = ({ size }: CustomIconProps) => {
+  return (
+    <svg
+      role="img"
+      height="32"
+      width="32"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      data-encore-id="icon"
+    >
+      <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+    </svg>
+  );
+};
+
 const icons: Record<string, FunctionComponent<CustomIconProps>> = {
   home: HomeIcon,
   logo: LogoIcon,
@@ -335,6 +350,7 @@ const icons: Record<string, FunctionComponent<CustomIconProps>> = {
   navigationNext: NavigationNextIcon,
   dropDown: DropDownIcon,
   externalLink: ExternalLinkIcon,
+  more: MoreIcon
 };
 
 const Icon = ({ name, size = 24 }: IconProps) => {
