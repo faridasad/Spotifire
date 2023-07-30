@@ -319,14 +319,31 @@ const MoreIcon = ({ size }: CustomIconProps) => {
   return (
     <svg
       role="img"
-      height="32"
-      width="32"
+      height={size}
+      width={size}
       aria-hidden="true"
       viewBox="0 0 24 24"
       data-encore-id="icon"
       fill="currentColor"
     >
       <path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+    </svg>
+  );
+};
+
+const ClockIcon = ({ size }: CustomIconProps) => {
+  return (
+    <svg
+      role="img"
+      height={size}
+      width={size}
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      data-encore-id="icon"
+      fill="currentColor"
+    >
+      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
+      <path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z"></path>
     </svg>
   );
 };
@@ -351,7 +368,8 @@ const icons: Record<string, FunctionComponent<CustomIconProps>> = {
   navigationNext: NavigationNextIcon,
   dropDown: DropDownIcon,
   externalLink: ExternalLinkIcon,
-  more: MoreIcon
+  more: MoreIcon,
+  clock: ClockIcon
 };
 
 const Icon = ({ name, size = 24 }: IconProps) => {
