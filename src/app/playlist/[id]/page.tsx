@@ -5,6 +5,8 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Icon from "@/app/components/Icons";
+import TracksTable from "@/app/components/TracksTable";
+
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -13,13 +15,13 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
     redirect("/api/auth/signin/spotify");
   }
 
-  spotifyApi.setAccessToken(session?.user?.accessToken);
-
-  let playlist, user;
-  if (spotifyApi.getAccessToken()) {
-    playlist = await spotifyApi.getPlaylist(params.id);
-    user = await spotifyApi.getUser(playlist.body.owner.id);
+  if(!spotifyApi.getAccessToken()) {
+    spotifyApi.setAccessToken(session?.user?.accessToken);
   }
+
+  const playlist = await spotifyApi.getPlaylist(params.id);
+  const user = await spotifyApi.getUser(playlist.body.owner.id);
+
 
   return (
     <div className={styles.playlist}>
@@ -62,17 +64,20 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
             <Icon name="play" />
           </span>
           <span className={styles.content__actions__more}>
-            <Icon name="more" />
+            <Icon name="more" size={32} />
           </span>
         </div>
-        <div className={styles.tracks}>
-          {
-            <ul>
-              {playlist?.body.tracks.items.map((item) => {
-                return <p>{item.track?.name}</p>;
-              })}
-            </ul>
-          }
+        <div className={styles.content__table}>
+          <div className={styles.content__table__header}>
+            <div className={styles.index}>#</div>
+            <div className={styles.title}>Title</div>
+            <div className={styles.album}>Album</div>
+            <div className={styles.date_added}>Date added</div>
+            <div className={styles.length}><Icon name="clock" size={16}/></div>
+          </div>
+          <div className={styles.content__table__tracks}>
+
+          </div>
         </div>
       </div>
     </div>
