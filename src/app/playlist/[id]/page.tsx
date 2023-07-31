@@ -1,12 +1,12 @@
 import Image from "next/image";
 import styles from "./playlist.module.scss";
 import spotifyApi from "../../../../lib/spotify";
-import { getServerSession } from "next-auth";
+import { Session, getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Icon from "@/app/components/Icons";
-import TracksTable from "@/app/components/TracksTable";
-
+import formatDate from "@/app/lib/formatDate";
+import { formatTimeFromMs } from "@/app/lib/timeUtils";
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -15,13 +15,12 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
     redirect("/api/auth/signin/spotify");
   }
 
-  if(!spotifyApi.getAccessToken()) {
+  if (!spotifyApi.getAccessToken()) {
     spotifyApi.setAccessToken(session?.user?.accessToken);
   }
 
   const playlist = await spotifyApi.getPlaylist(params.id);
   const user = await spotifyApi.getUser(playlist.body.owner.id);
-
 
   return (
     <div className={styles.playlist}>
@@ -69,14 +68,33 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
         </div>
         <div className={styles.content__table}>
           <div className={styles.content__table__header}>
-            <div className={styles.index}>#</div>
-            <div className={styles.title}>Title</div>
-            <div className={styles.album}>Album</div>
-            <div className={styles.date_added}>Date added</div>
-            <div className={styles.length}><Icon name="clock" size={16}/></div>
+            <div className={styles.head_index}>#</div>
+            <div className={styles.head_title}>Title</div>
+            <div className={styles.head_album}>Album</div>
+            <div className={styles.head_date_added}>Date added</div>
+            <div className={styles.head_length}>
+              <Icon name="clock" size={16} />
+            </div>
           </div>
           <div className={styles.content__table__tracks}>
-
+            {playlist.body.tracks.items.map((item, idx) => {
+              return (
+                <div className={styles.track} key={item.track?.id}>
+                  <div className={styles.order}>{idx + 1}</div>
+                  <div className={styles.title}>
+                    <a className={styles.one_line}>{item.track?.name}</a>
+                  </div>
+                  <div className={styles.album}>{item.track?.album.name}</div>
+                  <div className={styles.date_added}>
+                    {formatDate({
+                      date: item.added_at,
+                      style: "medium",
+                    })}
+                  </div>
+                  <div className={styles.length}>{formatTimeFromMs(Number(item.track?.duration_ms))}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
