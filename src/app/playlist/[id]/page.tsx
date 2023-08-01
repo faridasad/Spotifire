@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import Icon from "@/app/components/Icons";
 import formatDate from "@/app/lib/formatDate";
 import { formatTimeFromMs } from "@/app/lib/timeUtils";
+import TableTracks from "@/app/components/TableTracks";
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -77,7 +78,8 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
             </div>
           </div>
           <div className={styles.content__table__tracks}>
-            {playlist.body.tracks.items.map((item, idx) => {
+            <TableTracks items={playlist.body.tracks.items} spotifyApi={spotifyApi} />
+            {/*  {playlist.body.tracks.items.map((item, idx) => {
               return (
                 <div className={styles.track} key={item.track?.id}>
                   <div className={styles.order}>{idx + 1}</div>
@@ -91,10 +93,12 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
                       style: "medium",
                     })}
                   </div>
-                  <div className={styles.length}>{formatTimeFromMs(Number(item.track?.duration_ms))}</div>
+                  <div className={styles.length}>
+                    {formatTimeFromMs(Number(item.track?.duration_ms))}
+                  </div>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       </div>
