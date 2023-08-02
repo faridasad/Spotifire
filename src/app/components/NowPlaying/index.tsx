@@ -18,7 +18,7 @@ const NowPlaying = async ({track} : any) => {
   }
 
   if (!spotifyApi.getAccessToken()) {
-    spotifyApi.setAccessToken(session?.user?.accessToken);
+    spotifyApi.setAccessToken(session?.user?.accessToken as string);
   }
 
 

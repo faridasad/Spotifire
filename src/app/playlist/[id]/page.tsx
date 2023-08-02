@@ -17,7 +17,7 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
   }
 
   if (!spotifyApi.getAccessToken()) {
-    spotifyApi.setAccessToken(session?.user?.accessToken);
+    spotifyApi.setAccessToken(session?.user?.accessToken as string);
   }
 
   const playlist = await spotifyApi.getPlaylist(params.id);
