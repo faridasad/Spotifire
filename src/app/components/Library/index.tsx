@@ -42,7 +42,7 @@ export default async function Library() {
       {<ul role="list">
         {playlists?.map((i: any) => {
           return (
-            <Link href={`/playlist/${i.id}`}>
+            <Link href={`/playlist/${i.id}`} key={i.id}>
               <li
                 key={i.id}
               >
