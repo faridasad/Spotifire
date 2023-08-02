@@ -1,77 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react";
-import { Range, getTrackBackground } from "react-range";
+import usePlayerState from "@/app/store/playerState";
+import SpotifyPlayer from "react-spotify-web-playback";
 
-const STEP = 0.1;
-const MIN = 0;
-const MAX = 100;
+interface PlayerProps {
+  accessToken: string;
+}
 
-function Player() {
-  const [values, setValues] = useState([0]);
-  const [isOver, setIsOver] = useState(false);
+const Player = ({ accessToken }: PlayerProps) => {
+  const [trackUri, isPlaying, updateIsPlaying] = usePlayerState((state) => [
+    state.trackUri,
+    state.isPlaying,
+    state.updateIsPlaying,
+  ]);
+
+  if (!accessToken) return null;
 
   return (
-    <Range
-      values={values}
-      step={STEP}
-      min={MIN}
-      max={MAX}
-      onChange={(values) => setValues(values)}
-      renderTrack={({ props, children, isDragged }) => (
-        <div
-          onMouseDown={props.onMouseDown}
-          onTouchStart={props.onTouchStart}
-          style={{
-            ...props.style,
-            height: "18px",
-            display: "flex",
-            width: "100%",
-            cursor: "auto",
-          }}
-        >
-          <div
-            ref={props.ref}
-            onMouseOver={() => setIsOver(true)}
-            onMouseLeave={() => setIsOver(false)}
-            style={{
-              height: "5px",
-              width: "100%",
-              borderRadius: "4px",
-              background: getTrackBackground({
-                values: values,
-                colors: isOver || isDragged ? ["#1db954", "#535353"] : ["#ffffff", "#535353"],
-                min: MIN,
-                max: MAX,
-              }),
-              alignSelf: "center",
-            }}
-          >
-            {children}
-          </div>
-        </div>
-      )}
-      renderThumb={({ props, isDragged }) => (
-        <div
-          {...props}
-          className="thumb"
-          style={{
-            ...props.style,
-            opacity: isOver || isDragged ? 1 : 0,
-            cursor: "auto",
-            outline: "none",
-            height: "10px",
-            width: "10px",
-            borderRadius: "50%",
-            backgroundColor: "#FFF",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        ></div>
-      )}
+    <SpotifyPlayer
+      token={accessToken}
+      uris={trackUri ? [trackUri] : []}
+      play={true}
+      showSaveIcon
+      styles={{
+        bgColor: "#000",
+        color: "#fff",
+        sliderHandleColor: "#282828",
+      }}
     />
   );
-}
+};
 
 export default Player;

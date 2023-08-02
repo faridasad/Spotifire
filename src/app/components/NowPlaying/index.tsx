@@ -4,12 +4,28 @@ import Player from "./Player";
 import VolumeBar from "./VolumeBar";
 import "./now-playing.module.scss";
 import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+import spotifyApi from "../../../../lib/spotify";
 
-const NowPlaying = () => {
+const NowPlaying = async ({track} : any) => {
+
+  const session = await getServerSession(options);
+
+  if (!session) {
+    redirect("/api/auth/signin/spotify");
+  }
+
+  if (!spotifyApi.getAccessToken()) {
+    spotifyApi.setAccessToken(session?.user?.accessToken);
+  }
+
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_wrapper}>
-        <div className={styles.footer_wrapper__left}>
+        {/* <div className={styles.footer_wrapper__left}>
           <div className={styles.audio_image}>
             <Image src="https://i.scdn.co/image/ab67616d00004851d4be605a267df4e9a09f6245" width={56} height={56} alt=""/>
           </div>
@@ -61,7 +77,8 @@ const NowPlaying = () => {
               <VolumeBar />
             </div>
           </div>
-        </div>
+        </div> */}
+        <Player accessToken={spotifyApi.getAccessToken() as string} />
       </div>
     </footer>
   )
