@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default async function Library() {
 
-  const session = await getServerSession(options);
+  const session: any = await getServerSession(options);
 
   if (!session) {
     redirect("/api/auth/signin/spotify");
