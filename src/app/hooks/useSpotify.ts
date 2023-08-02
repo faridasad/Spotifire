@@ -22,7 +22,7 @@ const useSpotify = () => {
 
       spotifyApi.setAccessToken(session?.user?.accessToken);
     }
-  }, [session, spotifyApi]);
+  }, [session]);
 
   return spotifyApi;
 };
