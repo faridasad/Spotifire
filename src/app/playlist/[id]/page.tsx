@@ -78,7 +78,7 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
             </div>
           </div>
           <div className={styles.content__table__tracks}>
-            <TableTracks items={playlist.body.tracks.items} spotifyApi={spotifyApi} />
+            <TableTracks items={playlist.body.tracks.items} />
             {/*  {playlist.body.tracks.items.map((item, idx) => {
               return (
                 <div className={styles.track} key={item.track?.id}>

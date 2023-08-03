@@ -9,7 +9,7 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import spotifyApi from "../../../../lib/spotify";
 
-const NowPlaying = async ({track} : any) => {
+const NowPlaying = async () => {
 
   const session = await getServerSession(options);
 
