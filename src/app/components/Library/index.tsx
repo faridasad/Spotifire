@@ -8,14 +8,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function Library() {
-  const session: any = await getServerSession(options);
+  const session = await getServerSession(options);
 
   if (!session) {
     redirect("/api/auth/signin/spotify");
   }
 
   if (!spotifyApi.getAccessToken()) {
-    spotifyApi.setAccessToken(session?.user?.accessToken as string);
+    spotifyApi.setAccessToken(session?.user?.accessToken!);
   }
 
   const playlists = (await spotifyApi.getUserPlaylists())?.body?.items;
