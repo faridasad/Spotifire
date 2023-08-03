@@ -1,12 +1,10 @@
 import Image from "next/image";
 import styles from "./playlist.module.scss";
 import spotifyApi from "../../../../lib/spotify";
-import { Session, getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Icon from "@/app/components/Icons";
-import formatDate from "@/app/lib/formatDate";
-import { formatTimeFromMs } from "@/app/lib/timeUtils";
 import TableTracks from "@/app/components/TableTracks";
 
 const Playlist = async ({ params }: { params: { id: string } }) => {

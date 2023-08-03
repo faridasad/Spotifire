@@ -1,9 +1,6 @@
 import styles from "./now-playing.module.scss"
-import Icon from "../Icons";
 import Player from "./Player";
-import VolumeBar from "./VolumeBar";
 import "./now-playing.module.scss";
-import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
