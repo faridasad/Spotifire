@@ -8,18 +8,18 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function Library() {
-
   const session: any = await getServerSession(options);
 
   if (!session) {
     redirect("/api/auth/signin/spotify");
   }
   spotifyApi.setAccessToken(session?.user?.accessToken as string);
-  
-  let playlists;
-  if(spotifyApi.getAccessToken()){
-    playlists = (await spotifyApi.getUserPlaylists()).body.items
+
+  if (!spotifyApi.getAccessToken()) {
+    spotifyApi.setAccessToken(session?.user?.accessToken as string);
   }
+
+  const playlists = (await spotifyApi.getUserPlaylists())?.body?.items;
 
   return (
     <div className={styles.library}>
@@ -33,35 +33,33 @@ export default async function Library() {
       </div>
       <div className={styles.lib_content}>
         <div className={styles.search_filter}>
-          <button>
-          </button>
-          <div className={styles.dropdown}>
-          </div>
+          <button></button>
+          <div className={styles.dropdown}></div>
         </div>
       </div>
-      {<ul role="list">
-        {playlists?.map((i: any) => {
-          return (
-            <Link href={`/playlist/${i.id}`} key={i.id}>
-              <li
-                key={i.id}
-              >
-                <span className={styles.img_con}>
-                  <Image src={i.images[0].url} fill alt="" />
-                </span>
-                <div className={styles.item}>
-                  <span className={styles.name}>{i.name}</span>
-                  <div className={styles.details}>
-                    <span>{i.type}</span>
-                    &bull;
-                    <span>{i.owner.display_name}</span>
+      {
+        <ul role="list">
+          {playlists?.map((i: any) => {
+            return (
+              <Link href={`/playlist/${i.id}`} key={i.id}>
+                <li key={i.id}>
+                  <span className={styles.img_con}>
+                    <Image src={i.images[0].url} fill alt="" />
+                  </span>
+                  <div className={styles.item}>
+                    <span className={styles.name}>{i.name}</span>
+                    <div className={styles.details}>
+                      <span>{i.type}</span>
+                      &bull;
+                      <span>{i.owner.display_name}</span>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </Link>
-          );
-        })}
-      </ul>}
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
+      }
     </div>
   );
 }
