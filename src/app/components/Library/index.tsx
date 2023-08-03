@@ -13,7 +13,6 @@ export default async function Library() {
   if (!session) {
     redirect("/api/auth/signin/spotify");
   }
-  spotifyApi.setAccessToken(session?.user?.accessToken as string);
 
   if (!spotifyApi.getAccessToken()) {
     spotifyApi.setAccessToken(session?.user?.accessToken as string);
