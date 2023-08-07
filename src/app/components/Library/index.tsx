@@ -17,7 +17,7 @@ export default async function Library() {
     spotifyApi.setAccessToken(session?.user?.accessToken!);
   }
 
-  const playlists = (await spotifyApi.getUserPlaylists())?.body?.items;
+  const playlists = (await spotifyApi.getUserPlaylists(session.user?.accountId as string))?.body?.items;
 
   return (
     <div className={styles.library}>
