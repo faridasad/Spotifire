@@ -42,7 +42,7 @@ export const options: NextAuthOptions = {
           ...token,
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
-          username: account.providerAccountId,
+          accountId: account.providerAccountId,
           accessTokenExpiresAt: account.expires_at! * 1000,
         };
       }
@@ -59,7 +59,7 @@ export const options: NextAuthOptions = {
     async session({ session, token }: any) {
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
-      session.user.username = token.username;
+      session.user.accountId = token.accountId;
 
       return session;
     },
