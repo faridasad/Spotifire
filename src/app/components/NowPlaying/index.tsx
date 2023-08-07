@@ -14,11 +14,6 @@ const NowPlaying = async () => {
     redirect("/api/auth/signin/spotify");
   }
 
-  if (!spotifyApi.getAccessToken()) {
-    spotifyApi.setAccessToken(session?.user?.accessToken as string);
-  }
-
-
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_wrapper}>
@@ -75,7 +70,7 @@ const NowPlaying = async () => {
             </div>
           </div>
         </div> */}
-        <Player accessToken={spotifyApi.getAccessToken() as string} />
+        <Player accessToken={session.user?.accessToken as string} />
       </div>
     </footer>
   )

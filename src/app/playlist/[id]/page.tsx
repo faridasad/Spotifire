@@ -14,9 +14,7 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
     redirect("/api/auth/signin/spotify");
   }
 
-  if (!spotifyApi.getAccessToken()) {
-    spotifyApi.setAccessToken(session?.user?.accessToken as string);
-  }
+  spotifyApi.setAccessToken(session?.user?.accessToken as string);
 
   const playlist = await spotifyApi.getPlaylist(params.id);
   const user = await spotifyApi.getUser(playlist.body.owner.id);
