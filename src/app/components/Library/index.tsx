@@ -40,7 +40,7 @@ export default async function Library() {
               <Link href={`/playlist/${i.id}`} key={i.id}>
                 <li key={i.id}>
                   <span className={styles.img_con}>
-                    <Image src={i.images[0].url} fill alt="" />
+                    <Image src={i.images[0]?.url} fill alt="" />
                   </span>
                   <div className={styles.item}>
                     <span className={styles.name}>{i.name}</span>
