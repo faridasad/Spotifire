@@ -85,6 +85,9 @@
   }
 
   .content {
+
+    user-select: none;
+
     &__actions {
       display: flex;
       align-items: center;
@@ -123,10 +126,6 @@
           );
         margin-bottom: 1rem;
         padding-left: 1rem;
-      }
-
-      &__tracks {
-        
       }
     }
   }

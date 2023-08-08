@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Icon from "@/app/components/Icons";
-import TableTracks from "@/app/components/TableTracks";
+import PlaylistTracks from "@/app/components/PlaylistTracks";
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -18,6 +18,8 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
 
   const playlist = await spotifyApi.getPlaylist(params.id);
   const user = await spotifyApi.getUser(playlist.body.owner.id);
+
+  /* console.log(playlist.body.tracks.items[0].track?.artists); */
 
   return (
     <div className={styles.playlist}>
@@ -74,7 +76,7 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
             </div>
           </div>
           <div className={styles.content__table__tracks}>
-            <TableTracks items={playlist.body.tracks.items} />
+            <PlaylistTracks items={playlist.body.tracks.items} />
             {/*  {playlist.body.tracks.items.map((item, idx) => {
               return (
                 <div className={styles.track} key={item.track?.id}>
@@ -101,5 +103,6 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
+
 
 export default Playlist;
