@@ -1,14 +1,9 @@
-'use client'
+"use client";
 
 import { FunctionComponent } from "react";
 
 type CustomIconProps = {
   size: number;
-};
-
-type IconExportProps = {
-  name: string;
-  size?: number;
 };
 
 const PlaceholderIcon = ({ size }: CustomIconProps) => {
@@ -370,7 +365,7 @@ const ClockIcon = ({ size }: CustomIconProps) => {
   );
 };
 
-const icons: Record<string, FunctionComponent<CustomIconProps>> = {
+const icons = {
   home: HomeIcon,
   logo: LogoIcon,
   search: SearchIcon,
@@ -392,12 +387,23 @@ const icons: Record<string, FunctionComponent<CustomIconProps>> = {
   externalLink: ExternalLinkIcon,
   more: MoreIcon,
   clock: ClockIcon,
+} as const;
+
+type IconName = keyof typeof icons;
+
+type IconExportProps = {
+  name: IconName;
+  size?: number;
 };
 
-const Icon = ({ name, size = 24 }: IconExportProps) => {
+const Icon: FunctionComponent<IconExportProps> = ({ name, size = 24 }) => {
   const IconComponent = icons[name];
 
-  return IconComponent ? <IconComponent size={size} /> : <PlaceholderIcon size={24} />;
+  return IconComponent ? (
+    <IconComponent size={size} />
+  ) : (
+    <PlaceholderIcon size={24} />
+  );
 };
 
 export default Icon;
