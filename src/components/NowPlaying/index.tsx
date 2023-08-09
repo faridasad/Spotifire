@@ -4,7 +4,6 @@ import "./now-playing.module.scss";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import spotifyApi from "../../../../lib/spotify";
 
 const NowPlaying = async () => {
 

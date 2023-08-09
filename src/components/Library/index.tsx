@@ -2,7 +2,7 @@ import styles from "./library.module.scss";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import spotifyApi from "../../../../lib/spotify";
+import spotifyApi from "@/lib/spotify";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -40,7 +40,7 @@ export default async function Library() {
               <Link href={`/playlist/${i.id}`} key={i.id}>
                 <li key={i.id}>
                   <span className={styles.img_con}>
-                    <Image src={i.images[0]?.url} fill alt="" />
+                    <Image src={i.images[0]?.url ?? ""} fill alt="" />
                   </span>
                   <div className={styles.item}>
                     <span className={styles.name}>{i.name}</span>

@@ -36,7 +36,7 @@ const PlaylistTracks = ({ items }: any) => {
   } */
   return (
     <>
-      {items &&
+      {items !== null &&
         items?.map((item: any, idx: number) => {
           const isHovered = hoveredTrack === item.track?.id;
 
@@ -55,7 +55,7 @@ const PlaylistTracks = ({ items }: any) => {
               </div>
               <div className={styles.title}>
                 <span>
-                  <Image src={item.track?.album?.images[2]?.url} fill alt="" />
+                  <Image src={item.track?.album?.images[2]?.url ?? ""} fill alt="" />
                 </span>
                 <div className={styles.details}>
                   <div className={styles.inner}>
