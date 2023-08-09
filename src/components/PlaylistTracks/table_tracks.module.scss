@@ -18,6 +18,15 @@
     background-color: hsla(0, 0%, 100%, 0.1);
   }
 
+  .order {
+     
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   .title {
     > span {
       position: relative;
@@ -53,13 +62,15 @@
       }
     }
 
-    a {
+    
+  }
+  a {
       white-space: nowrap;
+      width: max-content;
 
       &:hover {
         text-decoration: underline;
         cursor: pointer;
       }
     }
-  }
 }

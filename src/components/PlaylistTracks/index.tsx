@@ -7,6 +7,7 @@ import usePlayerState from "@/app/store/playerState";
 import Icon from "../Icons";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const PlaylistTracks = ({ items }: any) => {
   const spotifyApi = useSpotify();
@@ -46,27 +47,57 @@ const PlaylistTracks = ({ items }: any) => {
               key={item.track?.id}
               onMouseEnter={() => setHoveredTrack(item.track?.id)}
               onMouseLeave={() => setHoveredTrack(null)}
-              onClick={() => {
-                updatePlayer(item.track?.uri);
+              onClick={(e) => {
+                if(e.detail === 2) {
+                  updatePlayer(item.track?.uri)
+                }
               }}
             >
               <div className={styles.order}>
-                {isHovered ? <Icon name="play" /> : idx + 1}
+                {isHovered ? (
+                  <span onClick={(e) => {
+                    e.stopPropagation();
+                    updatePlayer(item.track?.uri)
+                  }}>
+                    <Icon name="play" size={16} />
+                  </span>
+                ) : (
+                  idx + 1
+                )}
               </div>
               <div className={styles.title}>
                 <span>
-                  <Image src={item.track?.album?.images[2]?.url ?? ""} fill alt="" />
+                  <Image
+                    src={item.track?.album?.images[2]?.url ?? ""}
+                    fill
+                    alt=""
+                  />
                 </span>
                 <div className={styles.details}>
                   <div className={styles.inner}>
-                    <a className={styles.one_line}>{item.track?.name}</a>
+                    <Link
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      href="/search"
+                      className={styles.one_line}
+                    >
+                      {item.track?.name}
+                    </Link>
                     <div className={styles.artists}>
                       <p className={styles.one_line}>
                         {item.track?.artists?.map(
                           (artist: any, index: number) => (
                             <React.Fragment key={artist.id}>
                               {index > 0 && ", "}
-                              <a>{artist.name}</a>
+                              <Link
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                                href="/search"
+                              >
+                                {artist.name}
+                              </Link>
                             </React.Fragment>
                           )
                         )}
@@ -75,7 +106,16 @@ const PlaylistTracks = ({ items }: any) => {
                   </div>
                 </div>
               </div>
-              <div className={styles.album}>{item.track?.album.name}</div>
+              <div className={styles.album}>
+                <Link
+                  href="/search"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  {item.track?.album.name}
+                </Link>
+              </div>
               <div className={styles.date_added}>
                 {formatDate({
                   date: item.added_at,
