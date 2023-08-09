@@ -19,7 +19,7 @@ const Player = ({ accessToken }: PlayerProps) => {
     <SpotifyPlayer
       token={accessToken}
       uris={track.trackUri ? [track.trackUri] : []}
-      play={isPlaying}
+      play={isPlaying ? true : false}
       showSaveIcon
       initialVolume={50}
       styles={{
