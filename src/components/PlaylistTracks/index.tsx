@@ -11,59 +11,57 @@ import Link from "next/link";
 
 const PlaylistTracks = ({ items }: any) => {
   const spotifyApi = useSpotify();
-  const [updatePlayer] = usePlayerState((state) => [state.updateTrackUri]);
-  const [hoveredTrack, setHoveredTrack] = useState<string | null>(null);
+  const [track, updateTrack, isPlaying, updateIsPlaying] = usePlayerState(
+    (state) => [
+      state.track,
+      state.updateTrack,
+      state.isPlaying,
+      state.updateIsPlaying,
+    ]
+  );
 
-  /* async function getDevices() {
-    try {
-      const data = await spotifyApi.getMyDevices();
-      return data.body.devices;
-    } catch (err) {
-      console.log("Something went wrong!", err);
-    }
-  }
-
-  async function playSong(uri: string) {
-    try {
-      const devices = await getDevices();
-
-      spotifyApi.play({
-        uris: [uri],
-        device_id: devices![0].id as string,
-      });
-    } catch (error) {
-      console.log(error)
-    }
-  } */
   return (
     <>
       {items !== null &&
         items?.map((item: any, idx: number) => {
-          const isHovered = hoveredTrack === item.track?.id;
-
           return (
             <div
-              className={styles.track}
+              className={`${styles.track} ${styles.hoverable}`}
+              aria-selected={track.trackId === item.track?.id}
               key={item.track?.id}
-              onMouseEnter={() => setHoveredTrack(item.track?.id)}
-              onMouseLeave={() => setHoveredTrack(null)}
               onClick={(e) => {
-                if(e.detail === 2) {
-                  updatePlayer(item.track?.uri)
+                if (e.detail === 2) {
+                  updateTrack(item.track?.uri, item.track?.id);
+                  updateIsPlaying(true);
                 }
               }}
             >
               <div className={styles.order}>
-                {isHovered ? (
-                  <span onClick={(e) => {
-                    e.stopPropagation();
-                    updatePlayer(item.track?.uri)
-                  }}>
-                    <Icon name="play" size={16} />
+
+                {(isPlaying && track.trackId === item.track?.id) ? (
+                  <span
+                    className={styles.pause_icon}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateIsPlaying(false);
+                    }}
+                  >
+                    <Icon name="pause" size={16} />
                   </span>
                 ) : (
-                  idx + 1
+                  <span
+                    className={styles.play_icon}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateTrack(item.track?.uri, item.track?.id);
+                      updateIsPlaying(true);
+                    }}
+                  >
+                    <Icon name="play" size={16} />
+                  </span>
                 )}
+
+                <span className={styles.order_num}>{idx + 1}</span>
               </div>
               <div className={styles.title}>
                 <span>
@@ -80,7 +78,7 @@ const PlaylistTracks = ({ items }: any) => {
                         e.stopPropagation();
                       }}
                       href="/search"
-                      className={styles.one_line}
+                      className={`${styles.one_line} ${styles.track_name}`}
                     >
                       {item.track?.name}
                     </Link>

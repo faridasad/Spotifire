@@ -8,24 +8,28 @@ interface PlayerProps {
 }
 
 const Player = ({ accessToken }: PlayerProps) => {
-  const [trackUri, isPlaying, updateIsPlaying] = usePlayerState((state) => [
-    state.trackUri,
-    state.isPlaying,
-    state.updateIsPlaying,
-  ]);
-
   if (!accessToken) return null;
+
+  const [track, isPlaying] = usePlayerState((state) => [
+    state.track,
+    state.isPlaying,
+  ]);
 
   return (
     <SpotifyPlayer
       token={accessToken}
-      uris={trackUri ? [trackUri] : []}
-      play={true}
+      uris={track.trackUri ? [track.trackUri] : []}
+      play={isPlaying}
       showSaveIcon
+      initialVolume={50}
       styles={{
         bgColor: "#000",
         color: "#fff",
-        sliderHandleColor: "#282828",
+        sliderHandleColor: "#FFFFFF",
+        activeColor: "#1ed760",
+        sliderColor: "#1ed760",
+        trackNameColor: "#FFFFFF",
+        trackArtistColor: "#FFFFFF",
       }}
     />
   );

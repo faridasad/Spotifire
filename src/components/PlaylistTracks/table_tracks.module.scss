@@ -1,3 +1,40 @@
+.track.hoverable {
+  .play_icon,
+  .pause_icon {
+    display: none;
+  }
+
+  &:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+
+    .play_icon,
+    .pause_icon {
+      display: block;
+    }
+    .order_num {
+      display: none;
+    }
+  }
+
+  &[aria-selected="true"] {
+    .track_name,
+    .pause_icon,
+    .order_num {
+      color: #1ed760;
+    }
+
+    &:hover {
+      .play_icon,
+      .pause_icon {
+        display: block;
+      }
+      .order_num {
+        display: none;
+      }
+    }
+  }
+}
+
 .track {
   display: grid;
   grid-gap: 1rem;
@@ -14,12 +51,7 @@
     align-items: center;
   }
 
-  &:hover {
-    background-color: hsla(0, 0%, 100%, 0.1);
-  }
-
   .order {
-     
     span {
       display: flex;
       align-items: center;
@@ -59,18 +91,22 @@
       .artists {
         display: flex;
         align-items: center;
+
+        a {
+          color: #b3b3b3;
+          font-weight: 500;
+          font-size: 0.875rem;
+        }
       }
     }
-
-    
   }
   a {
-      white-space: nowrap;
-      width: max-content;
+    white-space: nowrap;
+    width: max-content;
 
-      &:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
     }
+  }
 }
