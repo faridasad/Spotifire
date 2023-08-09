@@ -8,12 +8,12 @@ interface PlayerProps {
 }
 
 const Player = ({ accessToken }: PlayerProps) => {
-  if (!accessToken) return null;
-
   const [track, isPlaying] = usePlayerState((state) => [
     state.track,
     state.isPlaying,
   ]);
+
+  if (!accessToken) return null;
 
   return (
     <SpotifyPlayer
