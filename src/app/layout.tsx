@@ -1,10 +1,10 @@
 import "./styles/globals.scss";
 import { Roboto } from "next/font/google";
-import LeftSidebar from "./components/LeftSidebar";
+import LeftSidebar from "@/components/LeftSidebar";
 import styles from "./page.module.scss";
-import MainView from "./components/MainView";
-import NowPlaying from "./components/NowPlaying";
-import Provider from "./components/Provider";
+import MainView from "@/components/MainView";
+import NowPlaying from "@/components/NowPlaying";
+import Provider from "@/components/Provider";
 
 export const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
