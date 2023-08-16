@@ -7,6 +7,7 @@ const nextConfig = {
       "upload.wikimedia.org",
       "images-ak.spotifycdn.com",
       "mosaic.scdn.co",
+      "charts-images.scdn.co"
     ],
   },
  
