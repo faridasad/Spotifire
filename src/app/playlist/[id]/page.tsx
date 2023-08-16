@@ -6,6 +6,22 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Icon from "@/components/Icons";
 import PlaylistTracks from "@/components/PlaylistTracks";
+import { PlaylistTypes } from "@/app/types/PlaylistType";
+import formatDate from "@/app/utils/formatDate";
+import { formatTimeFromMs } from "@/app/utils/formatTime";
+
+async function getPlaylistWebAPI(id: string, accessToken: string) {
+  const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!res.ok)
+    throw new Error("An error occured while connecting Spotify Web Api");
+
+  return await res.json();
+}
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -16,25 +32,27 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
 
   spotifyApi.setAccessToken(session?.user?.accessToken as string);
 
-  const playlist = await spotifyApi.getPlaylist(params.id);
-  const user = await spotifyApi.getUser(playlist.body.owner.id);
+  const playlist: PlaylistTypes = await getPlaylistWebAPI(
+    params.id,
+    session?.user?.accessToken as string
+  );
 
-  /* console.log(playlist.body.tracks.items[0].track?.artists); */
+  const user = await spotifyApi.getUser(playlist.owner.id);
 
   return (
     <div className={styles.playlist}>
       <div className={styles.header}>
         <span className={styles.header__img}>
-          <Image src={playlist?.body.images[0].url ?? ""} fill alt="" />
+          <Image src={playlist?.images[0].url ?? ""} fill alt="" />
         </span>
         <div className={styles.header__info}>
           <p className={styles.header__info__type}>
-            {playlist?.body.type.charAt(0).toUpperCase()! +
-              playlist?.body.type.slice(1)}
+            {playlist?.type.charAt(0).toUpperCase()! +
+              playlist?.type.slice(1)}
           </p>
-          <h1 className={styles.header__info__name}>{playlist?.body.name}</h1>
+          <h1 className={styles.header__info__name}>{playlist?.name}</h1>
           <p className={styles.header__info__description}>
-            {playlist?.body.description}
+            {playlist?.description}
           </p>
           <div className={styles.details}>
             <div className={styles.owner}>
@@ -47,11 +65,11 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
             </div>
             &bull;
             <span className={styles.likes}>
-              {playlist?.body.followers.total} likes
+              {playlist?.followers.total} likes
             </span>
             &bull;
             <span className={styles.songs}>
-              {playlist?.body.tracks.total} songs
+              {playlist?.tracks.total} songs
             </span>
           </div>
         </div>
@@ -76,8 +94,8 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
             </div>
           </div>
           <div className={styles.content__table__tracks}>
-            <PlaylistTracks items={playlist.body.tracks.items} />
-            {/*  {playlist.body.tracks.items.map((item, idx) => {
+            <PlaylistTracks items={playlist.tracks.items} />
+            {/* {playlist.tracks.items.map((item, idx) => {
               return (
                 <div className={styles.track} key={item.track?.id}>
                   <div className={styles.order}>{idx + 1}</div>
@@ -96,13 +114,12 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
               );
-            })} */}
+            })} */} 
           </div>
         </div>
       </div>
     </div>
-  );
+  ); 
 };
-
 
 export default Playlist;
