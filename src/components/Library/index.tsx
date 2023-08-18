@@ -5,6 +5,23 @@ import { redirect } from "next/navigation";
 import spotifyApi from "@/lib/spotify";
 import Link from "next/link";
 import Image from "next/image";
+import { PlaylistTypes } from "@/app/types/PlaylistType";
+
+
+async function getUserPlaylistsWebAPI(accessToken: string) {
+  try{
+    const res = await fetch(`https://api.spotify.com/v1/me/playlists`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+
+  return await res.json();
+  }catch(err){
+    console.log(err)
+  }
+}
 
 export default async function Library() {
   const session = await getServerSession(options);
@@ -14,8 +31,9 @@ export default async function Library() {
   }
   spotifyApi.setAccessToken(session?.user?.accessToken!);
 
+  /* const playlists: PlaylistTypes[] = (await getUserPlaylistsWebAPI(session?.user?.accessToken!)).items */
 
-  const playlists = (await spotifyApi.getUserPlaylists()).body.items
+  const playlists = (await spotifyApi.getUserPlaylists()).body.items;
 
   return (
     <div className={styles.library}>
