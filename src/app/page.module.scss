@@ -17,12 +17,3 @@ $background-base: #121212;
   background-color: #000000;
 }
 
-.home {
-  position: absolute;
-  left: 30px;
-  top: 80px;
-  width: calc(100% - 30px);
-  height: calc(100vh - 200px);
-  overflow-y: scroll;
-}
-

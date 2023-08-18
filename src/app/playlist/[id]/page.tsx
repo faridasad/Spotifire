@@ -6,9 +6,6 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Icon from "@/components/Icons";
 import PlaylistTracks from "@/components/PlaylistTracks";
-import { PlaylistTypes } from "@/app/types/PlaylistType";
-import formatDate from "@/app/utils/formatDate";
-import { formatTimeFromMs } from "@/app/utils/formatTime";
 
 async function getPlaylistWebAPI(id: string, accessToken: string) {
   const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
@@ -32,11 +29,14 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
 
   spotifyApi.setAccessToken(session?.user?.accessToken as string);
 
-  const playlist: PlaylistTypes = await getPlaylistWebAPI(
+
+  // Directly from web api
+  /* const playlists: PlaylistTypes = await getPlaylistWebAPI(
     params.id,
     session?.user?.accessToken as string
-  );
+  ); */
 
+  const playlist = await (await spotifyApi.getPlaylist(params.id)).body
   const user = await spotifyApi.getUser(playlist.owner.id);
 
   return (

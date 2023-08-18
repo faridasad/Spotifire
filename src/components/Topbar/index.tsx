@@ -1,3 +1,4 @@
+'use client'
 import Icon from "../Icons";
 import { ReactNode } from "react";
 import styles from "./topbar.module.scss";
@@ -5,10 +6,13 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import DropdownMenu from "./DropdownMenu";
 import LoginButton from "./LoginButton";
+import { useSession } from "next-auth/react";
 
-export default async function Topbar({ children }: { children?: ReactNode }) {
-  const session = await getServerSession(options);
-
+export default function Topbar({ children }: { children?: ReactNode }) {
+  const { data: session, status } = useSession();
+  if(status === 'loading'){
+    return <div>loading..</div>
+  }
 
   return (
     <header className={styles.header}>

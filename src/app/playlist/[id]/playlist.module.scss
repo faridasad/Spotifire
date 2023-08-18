@@ -14,10 +14,9 @@
     background-color: #555;
   }
 
-  position: absolute;
-  left: 30px;
-  top: 80px;
-  width: calc(100% - 30px);
+  padding: 0 3rem;
+  padding-top: 4rem;
+  width: 100%;
   height: calc(100vh - 200px);
   overflow-y: scroll;
 
