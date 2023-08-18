@@ -5,6 +5,7 @@ import styles from "./page.module.scss";
 import MainView from "@/components/MainView";
 import NowPlaying from "@/components/NowPlaying";
 import Provider from "@/components/Provider";
+import Topbar from "@/components/Topbar";
 
 export const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
@@ -24,10 +25,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  
-
-
   return (
     <html lang="en" className={`${roboto.variable}`}>
       <body className={roboto.className}>

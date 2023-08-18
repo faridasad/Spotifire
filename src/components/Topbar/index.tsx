@@ -1,18 +1,12 @@
-'use client'
+"use client";
 import Icon from "../Icons";
 import { ReactNode } from "react";
 import styles from "./topbar.module.scss";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/options";
 import DropdownMenu from "./DropdownMenu";
-import LoginButton from "./LoginButton";
 import { useSession } from "next-auth/react";
 
 export default function Topbar({ children }: { children?: ReactNode }) {
   const { data: session, status } = useSession();
-  if(status === 'loading'){
-    return <div>loading..</div>
-  }
 
   return (
     <header className={styles.header}>
@@ -32,7 +26,7 @@ export default function Topbar({ children }: { children?: ReactNode }) {
           username={session.user?.name}
         />
       ) : (
-        <LoginButton />
+        <div className={styles.skeleton}></div>
       )}
     </header>
   );
