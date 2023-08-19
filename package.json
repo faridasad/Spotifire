@@ -24,6 +24,7 @@
     "react-spotify-web-playback": "^0.14.0",
     "react-use": "^17.4.0",
     "sass": "^1.62.1",
+    "spotify-web-api-js": "^1.5.2",
     "spotify-web-api-node": "^5.0.2",
     "typescript": "^5.1.6",
     "zustand": "^4.3.9"
