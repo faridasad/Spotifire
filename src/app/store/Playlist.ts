@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { PlaylistTypes } from "../types/PlaylistType";
+import { PlaylistTypes } from "../types/Playlist";
 
 interface PlaylistState {
   playlist: PlaylistTypes;
