@@ -1,6 +1,6 @@
 "use client";
 
-import usePlayerState from "@/app/store/playerState";
+import usePlayerState from "@/app/store/Player";
 import SpotifyPlayer from "react-spotify-web-playback";
 
 interface PlayerProps {

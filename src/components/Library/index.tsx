@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import spotifyApi from "@/lib/spotify";
 import Link from "next/link";
 import Image from "next/image";
-import { PlaylistTypes } from "@/app/types/PlaylistType";
+import { PlaylistTypes } from "@/app/types/Playlist";
 
 
 async function getUserPlaylistsWebAPI(accessToken: string) {
@@ -58,7 +58,7 @@ export default async function Library() {
               <Link href={`/playlist/${i.id}`} key={i.id}>
                 <li key={i.id}>
                   <span className={styles.img_con}>
-                    <Image src={i.images[0]?.url ?? ""} fill alt="" />
+                    <Image src={i.images[0]?.url ?? ""} fill alt="" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                   </span>
                   <div className={styles.item}>
                     <span className={styles.name}>{i.name}</span>

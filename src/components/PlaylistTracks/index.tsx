@@ -3,7 +3,7 @@ import formatDate from "@/app/lib/formatDate";
 import styles from "./table_tracks.module.scss";
 import { formatTimeFromMs } from "@/app/lib/timeUtils";
 import useSpotify from "@/app/hooks/useSpotify";
-import usePlayerState from "@/app/store/playerState";
+import usePlayerState from "@/app/store/Player";
 import Icon from "../Icons";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -69,6 +69,7 @@ const PlaylistTracks = ({ items }: any) => {
                     src={item.track?.album?.images[2]?.url ?? ""}
                     fill
                     alt=""
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </span>
                 <div className={styles.details}>

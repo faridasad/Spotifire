@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import Icon from "@/components/Icons";
 import PlaylistTracks from "@/components/PlaylistTracks";
 
-async function getPlaylistWebAPI(id: string, accessToken: string) {
+/* async function getPlaylistWebAPI(id: string, accessToken: string) {
   const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -18,7 +18,7 @@ async function getPlaylistWebAPI(id: string, accessToken: string) {
     throw new Error("An error occured while connecting Spotify Web Api");
 
   return await res.json();
-}
+} */
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
   const session = await getServerSession(options);
@@ -36,14 +36,14 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
     session?.user?.accessToken as string
   ); */
 
-  const playlist = await (await spotifyApi.getPlaylist(params.id)).body
+  const playlist = (await spotifyApi.getPlaylist(params.id)).body
   const user = await spotifyApi.getUser(playlist.owner.id);
 
   return (
     <div className={styles.playlist}>
       <div className={styles.header}>
         <span className={styles.header__img}>
-          <Image src={playlist?.images[0].url ?? ""} fill alt="" />
+          <Image src={playlist?.images[0].url ?? ""} fill alt="" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </span>
         <div className={styles.header__info}>
           <p className={styles.header__info__type}>
@@ -57,7 +57,7 @@ const Playlist = async ({ params }: { params: { id: string } }) => {
           <div className={styles.details}>
             <div className={styles.owner}>
               <span className={styles.owner__img}>
-                {<Image src={user?.body.images![0].url ?? ""} fill alt="" />}
+                {<Image src={user?.body.images![0].url ?? ""} fill alt="" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />}
               </span>
               <span className={styles.owner__name}>
                 {user?.body.display_name}
