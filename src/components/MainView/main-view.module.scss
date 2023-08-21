@@ -1,9 +1,24 @@
-.main_view {
-    height: 100%;
-    width: 100%;
-    grid-area: main-view;
-    background-color: #282828;
-    border-radius: 8px;
-  margin-inline: auto;
+.container {
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+  }
 
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+  }
+  
+  height: 100%;
+  width: 100%;
+  grid-area: main-view;
+  background-color: #282828;
+  border-radius: 8px;
+  margin-inline: auto;
+  overflow-y: scroll;
 }
