@@ -21,7 +21,6 @@ import PlaylistTracks from "@/components/PlaylistTracks";
 } */
 
 const Playlist = async ({ params }: { params: { id: string } }) => {
-  throw new Error();
   const session = await getServerSession(options);
 
   if (!session) {
