@@ -1,0 +1,38 @@
+.card {
+  aspect-ratio: 1/1;
+  border: none;
+  border-radius: 0.5rem;
+
+  .wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .name {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 1rem;
+    }
+
+    .image_con {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      span {
+        display: block;
+        position: relative;
+        width: 100px;
+        height: 100px;
+        transform: rotate(25deg) translate(18%, -2%);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
