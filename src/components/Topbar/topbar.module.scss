@@ -6,7 +6,15 @@
   padding: 16px 32px;
   position: sticky;
   top: 0;
-  background: transparent;
+  z-index: 999;
+
+  &.transparent {
+    background: transparent;
+  }
+
+  &.solid {
+    background-color: inherit;
+  }
 
   .navigation_arrows {
     display: flex;

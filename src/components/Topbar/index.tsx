@@ -1,15 +1,21 @@
 "use client";
 import Icon from "../Icons";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import styles from "./topbar.module.scss";
 import DropdownMenu from "./DropdownMenu";
 import { useSession } from "next-auth/react";
 
-export default function Topbar({ children }: { children?: ReactNode }) {
+interface TopbarProps {
+  children: ReactNode,
+  path: string,
+}
+
+const Topbar: FC<TopbarProps> = ({children, path}) => {
   const { data: session, status } = useSession();
 
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${path.startsWith("/playlist") ? styles.transparent : styles.solid}`}>
       <div className={styles.navigation_arrows}>
         <button name="Go Prev">
           <Icon name="navigationPrev" size={16} />
@@ -31,3 +37,5 @@ export default function Topbar({ children }: { children?: ReactNode }) {
     </header>
   );
 }
+
+export default Topbar
