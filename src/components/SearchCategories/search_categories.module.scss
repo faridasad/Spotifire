@@ -1,0 +1,55 @@
+@mixin random-bgr() {
+  background: rgb(random(255), random(255), random(255));
+}
+
+@mixin responsive-grid($breakpoints) {
+  @each $breakpoint, $columns_count in $breakpoints {
+    @media screen and (max-width: $breakpoint) {
+      $columns: map-get($breakpoints, $breakpoint);
+      grid-template-columns: repeat($columns, minmax(0, 1fr));
+    }
+  }
+}
+
+$category_grid_breakpoints: (
+  1600px: 6,
+  1400px: 4,
+  768px: 3,
+);
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1rem;
+    padding: 0 20px;
+    padding-bottom: 1rem;
+
+    .head_text {
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+    }
+
+    .category_grid {
+        display: grid;
+        grid-auto-rows: auto;
+        gap: 1rem;
+        $columns_count: 4;
+      
+        @include responsive-grid($category_grid_breakpoints);
+      
+        $count: 100;
+      
+        a {
+          @for $i from 0 to $count {
+            &:nth-child(#{$i}) {
+              @include random-bgr();
+            }
+          }
+        }
+      }
+      
+}
+
