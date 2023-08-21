@@ -5,24 +5,30 @@ import styles from "./searchbar.module.scss";
 import debounce from "lodash/debounce";
 import useSpotify from "@/app/hooks/useSpotify";
 import useTracksStore from "@/app/store/Tracks";
+import { useRouter } from "next/navigation";
 
 function SearchBar() {
   const spotifyApi = useSpotify();
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
   const [updateTracks] = useTracksStore((state) => [state.updateTracks]);
 
   const debouncedHandleSearch = debounce(async (query: string | undefined) => {
-    if (!query && (query?.length as number) < 3) return;
+    if (!query) {
+      router.push("/search");
+      return;
+    }
 
     try {
-      const { items } = (await spotifyApi.searchTracks(query as string)).body
+      /* const { items } = (await spotifyApi.searchTracks(query as string)).body
         .tracks!;
 
-      updateTracks(items);
+      updateTracks(items); */
+      router.push(`search/${query}`);
     } catch (err) {
       console.log(err);
     }
-  }, 500);
+  }, 0);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const query = inputRef.current?.value;
