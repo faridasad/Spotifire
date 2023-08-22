@@ -1,0 +1,19 @@
+.span {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  border-radius: 2px;
+  color: #121212;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: 9px;
+  height: 16px;
+  justify-content: center;
+  line-height: 10px;
+  padding: 3px 5px;
+  text-transform: uppercase;
+}
