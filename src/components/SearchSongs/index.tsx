@@ -1,6 +1,6 @@
 "use client";
 
-import { Tracks } from "@/app/types/Tracks";
+import { Tracks } from "@/app/types/Track";
 import { FC, Fragment } from "react";
 import styles from "./search_songs.module.scss";
 import Image from "next/image";

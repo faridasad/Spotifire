@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Tracks } from "../types/Tracks";
+import { Tracks } from "../types/Track";
 
 interface TracksState {
   tracks: Tracks;
