@@ -15,7 +15,6 @@ interface SearchSongsProps {
 }
 
 const SearchSongs: FC<SearchSongsProps> = ({ tracks }) => {
-  if (!tracks || tracks === null) return;
 
   const [track, updateTrack, isPlaying, updateIsPlaying] = usePlayerState(
     (state) => [
@@ -28,7 +27,7 @@ const SearchSongs: FC<SearchSongsProps> = ({ tracks }) => {
 
   return (
     <div className={styles.tracks_con}>
-      {tracks.slice(0, 4).map((item) => {
+      {tracks?.slice(0, 4).map((item) => {
         return (
           <div
             className={`${styles.track} ${styles.hoverable}`}
