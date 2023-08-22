@@ -1,0 +1,134 @@
+.tracks_con {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 56px;
+    padding-inline: 1rem;
+    border-radius: 4px;
+
+    .img_con {
+      position: relative;
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .track_info {
+      p {
+        max-width: 50ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      @media screen and (width <= 1400px) {
+        p {
+          max-width: 25ch;
+        }
+      }
+
+      .artists {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-top: 0.25rem;
+
+        a {
+          color: #b3b3b3;
+          font-weight: 500;
+          font-size: 0.875rem;
+        }
+
+        span {
+          margin-right: 0.15rem;
+        }
+      }
+    }
+
+    .track_utils {
+      margin-left: auto;
+      color: #b3b3b3;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .like_con {
+        margin-right: 1rem;
+      }
+
+      .length {
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .like_con,
+      .more_con {
+        cursor: pointer;
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      .img_con {
+        img {
+          filter: brightness(50%);
+        }
+      }
+
+      .track_utils {
+        .like_con,
+        .more_con {
+          opacity: 1;
+        }
+      }
+    }
+
+    a {
+      white-space: nowrap;
+      width: max-content;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .track.hoverable {
+    .play_icon,
+    .pause_icon {
+      display: none;
+    }
+
+    &:hover {
+      background-color: hsla(0, 0%, 100%, 0.1);
+
+      .play_icon,
+      .pause_icon {
+        display: block;
+        z-index: 2;
+      }
+    }
+
+    &[aria-selected="true"] {
+      .track_name,
+      .pause_icon {
+        color: #1ed760;
+      }
+      &:hover {
+        .play_icon,
+        .pause_icon {
+          display: block;
+        }
+      }
+    }
+  }
+}

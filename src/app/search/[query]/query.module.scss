@@ -10,7 +10,7 @@
 $category_grid_breakpoints: (
   1600px: 6,
   1400px: 4,
-  768px: 2,
+  1200px: 2,
 );
 
 .container {
@@ -58,8 +58,6 @@ $category_grid_breakpoints: (
           user-select: none;
           cursor: pointer;
 
-          
-
           .image_con {
             position: relative;
             display: block;
@@ -98,7 +96,7 @@ $category_grid_breakpoints: (
           &:hover {
             background-color: #282828;
 
-            .play_con{
+            .play_con {
               bottom: 20px;
               opacity: 1;
             }
@@ -131,10 +129,12 @@ $category_grid_breakpoints: (
       }
 
       .top_songs {
-        @media screen and (width <= 768px) {
+        @media screen and (width <= 1200px) {
           grid-column: 1 / -1;
         }
         grid-column: 3 / -1;
+
+        
       }
     }
   }

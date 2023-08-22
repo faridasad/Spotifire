@@ -1,11 +1,14 @@
 import styles from "./query.module.scss";
 import { options } from "@/app/api/auth/[...nextauth]/options";
+import { formatTimeFromMs } from "@/app/utils/formatTime";
+import Explicit from "@/components/Explicit";
 import Icon from "@/components/Icons";
+import SearchSongs from "@/components/SearchSongs";
 import spotifyApi from "@/lib/spotify";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 
 interface SearchProps {
   params: {
@@ -62,15 +65,13 @@ const Search: FC<SearchProps> = async ({ params }) => {
                 <span className={styles.name}>{mostPopularItem?.name}</span>
                 <div>
                   <span className={styles.type}>
-                    {mostPopularItem?.type &&
-                      mostPopularItem?.type.charAt(0).toUpperCase() +
-                        mostPopularItem?.type.slice(1)}
+                    {mostPopularItem?.type === "artist" ? "Artist" : "Song"}
                   </span>
                 </div>
               </div>
               <div className={styles.play_con}>
                 <button className={styles.play_button} type="button">
-                  <Icon name="play" size={24}/>
+                  <Icon name="play" size={24} />
                 </button>
               </div>
             </div>
@@ -79,9 +80,8 @@ const Search: FC<SearchProps> = async ({ params }) => {
             <div>
               <h2>Songs</h2>
             </div>
-            {tracks.items.slice(0, 3).map((item) => {
-              return item.name;
-            })}
+
+            <SearchSongs tracks={tracks.items} />
           </section>
         </div>
       </div>
