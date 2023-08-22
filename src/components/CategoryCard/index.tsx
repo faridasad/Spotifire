@@ -2,20 +2,10 @@ import { FC } from "react";
 import styles from "./category_card.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { Category } from "@/app/types/Category";
 
 interface CategoryCardProps {
-  category: {
-    id: string;
-    name: string;
-    href: string;
-    icons: [
-      {
-        height: number | null;
-        width: number | null;
-        url: string | null;
-      }
-    ];
-  };
+  category: Category
 }
 
 const CategoryCard: FC<CategoryCardProps> = ({ category }) => {

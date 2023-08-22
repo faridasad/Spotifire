@@ -16,7 +16,7 @@ const SearchCategories: FC<SearchCategoriesProps> = ({ categories }) => {
       </div>
       <div className={styles.category_grid}>
         {categories.map((c) => {
-          return <CategoryCard category={c} key={c.id} />;
+          return <CategoryCard category={c} key={c.id} /> // TODO
         })}
       </div>
     </div>
