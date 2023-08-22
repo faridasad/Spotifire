@@ -8,7 +8,7 @@ import Image from "next/image";
 import { PlaylistTypes } from "@/app/types/Playlist";
 
 
-async function getUserPlaylistsWebAPI(accessToken: string) {
+/* async function getUserPlaylistsWebAPI(accessToken: string) {
   try{
     const res = await fetch(`https://api.spotify.com/v1/me/playlists`, {
     headers: {
@@ -21,7 +21,7 @@ async function getUserPlaylistsWebAPI(accessToken: string) {
   }catch(err){
     console.log(err)
   }
-}
+} */
 
 export default async function Library() {
   const session = await getServerSession(options);
@@ -63,7 +63,7 @@ export default async function Library() {
                   <div className={styles.item}>
                     <span className={styles.name}>{i.name}</span>
                     <div className={styles.details}>
-                      <span>{i.type}</span>
+                      <span>{i.type.charAt(0).toUpperCase() + i.type.slice(1)}</span>
                       &bull;
                       <span>{i.owner.display_name}</span>
                     </div>
