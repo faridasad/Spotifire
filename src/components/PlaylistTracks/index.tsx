@@ -38,8 +38,7 @@ const PlaylistTracks = ({ items }: any) => {
               }}
             >
               <div className={styles.order}>
-
-                {(isPlaying && track.trackId === item.track?.id) ? (
+                {isPlaying && track.trackId === item.track?.id ? (
                   <span
                     className={styles.pause_icon}
                     onClick={(e) => {
@@ -68,7 +67,9 @@ const PlaylistTracks = ({ items }: any) => {
                 <span>
                   <Image
                     src={item.track?.album?.images[2]?.url ?? ""}
-                    fill
+                    width={40}
+                    height={40}
+                    style={{ objectFit: "cover" }}
                     alt=""
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
@@ -82,7 +83,9 @@ const PlaylistTracks = ({ items }: any) => {
                       href="/search"
                       className={`${styles.one_line} ${styles.track_name}`}
                     >
-                      {item.track?.name.length > 40 ? item.track?.name.substring(0, 40) + "..." : item.track?.name}
+                      {item.track?.name.length > 40
+                        ? item.track?.name.substring(0, 40) + "..."
+                        : item.track?.name}
                     </Link>
                     <div className={styles.artists}>
                       <p className={styles.one_line}>
@@ -113,7 +116,9 @@ const PlaylistTracks = ({ items }: any) => {
                     e.stopPropagation();
                   }}
                 >
-                  {item.track?.album.name.length > 25 ? item.track?.album.name.substring(0, 25) + "..." : item.track?.album.name}
+                  {item.track?.album.name.length > 25
+                    ? item.track?.album.name.substring(0, 25) + "..."
+                    : item.track?.album.name}
                 </Link>
               </div>
               <div className={styles.date_added}>
