@@ -1,13 +1,14 @@
 "use client";
-import formatDate from "@/app/lib/formatDate";
+
 import styles from "./table_tracks.module.scss";
-import { formatTimeFromMs } from "@/app/lib/timeUtils";
 import useSpotify from "@/app/hooks/useSpotify";
 import usePlayerState from "@/app/store/Player";
 import Icon from "../Icons";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import formatDate from "@/app/utils/formatDate";
+import { formatTimeFromMs } from "@/app/utils/formatTime";
 
 const PlaylistTracks = ({ items }: any) => {
   const spotifyApi = useSpotify();
