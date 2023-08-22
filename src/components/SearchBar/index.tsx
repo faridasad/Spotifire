@@ -11,7 +11,7 @@ function SearchBar() {
   const spotifyApi = useSpotify();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
-  const [updateTracks] = useTracksStore((state) => [state.updateTracks]);
+  //const [updateTracks] = useTracksStore((state) => [state.updateTracks]);
 
   const debouncedHandleSearch = debounce(async (query: string | undefined) => {
     if (!query) {
@@ -24,7 +24,7 @@ function SearchBar() {
         .tracks!;
 
       updateTracks(items); */
-      router.push(`search/${query}`);
+      router.push(`/search/${query}`);
     } catch (err) {
       console.log(err);
     }
