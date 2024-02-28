@@ -9,6 +9,9 @@ const nextConfig = {
       "mosaic.scdn.co",
       "charts-images.scdn.co",
       "t.scdn.co",
+      "blend-playlist-covers.spotifycdn.com",
+      "image-cdn-ak.spotifycdn.com",
+      "image-cdn-fa.spotifycdn.com"
     ],
   },
 };
