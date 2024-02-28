@@ -5,11 +5,11 @@ const spotifyApi = new SpotifyWebApi();
 async function getPlaylist() {
   return (await spotifyApi.searchTracks("example")).body.tracks?.items[0];
 }
-export type Track = Awaited<ReturnType<typeof getPlaylist>>;
+export type Playlist = Awaited<ReturnType<typeof getPlaylist>>;
 
 
 // Get Playlists type
 async function getPlaylists() {
   return (await spotifyApi.searchTracks("example")).body.tracks?.items;
 }
-export type Tracks = Awaited<ReturnType<typeof getPlaylists>>;
+export type Playlists = Awaited<ReturnType<typeof getPlaylists>>;
