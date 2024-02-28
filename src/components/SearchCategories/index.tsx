@@ -1,7 +1,7 @@
 "use client";
 import { FC } from "react";
 import styles from "./search_categories.module.scss";
-import { Categories } from "@/app/types/Categories";
+import { Categories } from "@/app/types/Category";
 import CategoryCard from "../CategoryCard";
 
 interface SearchCategoriesProps {
