@@ -20,14 +20,10 @@ export const metadata = {
   description: "Spotify clone built with Next.js",
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${roboto.variable}`}>
-      <body className={roboto.className}>
+      <body className={roboto.className} style={{ color: "#ffffff" }}>
         <div className={styles.rootGrid}>
           <Provider>
             <LeftSidebar />
